@@ -1,0 +1,19 @@
+<?php
+    
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Route;
+
+  Route::group([
+    'middleware' => [
+        'api',
+    ],
+    'prefix'     => 'api/1.0/{{modelNameSingularLowerCase}}',
+], function () {
+  //{{modelName}} ROUTES 
+    Route::get('/all', ['uses'=> '{{modelName}}Controller@all']);
+    Route::get('/{id}', '{{modelName}}Controller@find');
+    Route::post('/save', '{{modelName}}Controller@save');
+    Route::put('/update/{id}', '{{modelName}}Controller@update');
+    Route::put('/change/active/{id}', '{{modelName}}Controller@change_status');
+    Route::delete('/delete/{id}', '{{modelName}}Controller@delete');
+  });

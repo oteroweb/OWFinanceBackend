@@ -1,0 +1,188 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Models\Repositories\{{modelName}}Repo;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+
+class {{modelName}}Controller extends Controller
+{   
+    private ${{modelName}}Repo;
+    public function __construct({{modelName}}Repo ${{modelName}}Repo) {
+        $this->{{modelName}}Repo = ${{modelName}}Repo;
+    }
+    public function all() {
+        try { ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->all();
+            $response = [
+                'status'  => 'OK',
+                'code'    => 200,
+                'message' => __('{{tableName}} Obtained Correctly'),
+                'data'    => ${{modelNameSingularLowerCase}},
+            ];
+            return response()->json($response, 200);
+        } catch (\Exception $ex) {
+            Log::error($ex);
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 500,
+                'message' => __('An error has occurred') . '.',
+            ];
+            return response()->json($response, 500);
+        }
+    }     
+
+    public function find($id) {
+        try {
+            ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->find($id);
+            if (isset(${{modelNameSingularLowerCase}}->id)) {
+                $response = [
+                    'status'  => 'OK',
+                    'code'    => 200,
+                    'message' => __('{{tableName}} Obtained Correctly'),
+                    'data'    => ${{modelNameSingularLowerCase}},
+                ];
+                return response()->json($response, 200);
+            }
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 404,
+                'message' => __('Not Data with this {{tableName}}') . '.',
+            ];
+            return response()->json($response, 200);
+        } catch (\Exception $ex) {
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 500,
+                'message' => __('An error has occurred') . '.',
+            ];
+            return response()->json($response, 500);
+        }
+    }
+    
+    public function save(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required',
+        ], $this->custom_message());
+        if ($validator->fails()) {
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 400,
+                'message' => __('Incorrect Params'),
+                'data'    => $validator->errors()->getMessages(),
+            ];
+            return response()->json($response);
+        }
+        try {
+            $data = [ 
+            'name'=> $request->input('name'),
+            ];
+            ${{modelNameSingularLowerCase}}= $this->{{modelName}}Repo->store($data);
+            $response = [
+                'status'  => 'OK',
+                'code'    => 200,
+                'message' => __('{{tableName}} saved correctly'),
+                'data'    => ${{modelNameSingularLowerCase}},
+            ];
+            return response()->json($response, 200);
+        } catch (\Exception $ex) {
+            Log::error($ex);
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 500,
+                'message' => __('An error has occurred') . '.',
+            ];
+            return response()->json($response, 500);
+        }
+    }
+
+    public function update(Request $request, $id) {
+        ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->find($id);
+        if (isset(${{modelNameSingularLowerCase}}->id)) {
+            $data= array();
+            if (($request->input('name'))) { $data += ['name' => $request->input('name')]; }
+            ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->update(${{modelNameSingularLowerCase}}, $data);
+            $response = [
+                'status'  => 'OK',
+                'code'    => 200,
+                'message' => __('{{tableName}} updated'),
+                'data'    => ${{modelNameSingularLowerCase}},
+            ];
+            return response()->json($response, 200);
+        }
+        $response = [
+            'status'  => 'FAILED',
+            'code'    => 500,
+            'message' => __('{{tableName}} dont exists') . '.',
+        ];
+        return response()->json($response, 500);
+    }
+
+    public function delete(Request $request, $id) {
+        try {
+            if ($this->{{modelName}}Repo->find($id)) {
+                ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->find($id);
+                ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->delete(${{modelNameSingularLowerCase}}, ['active' => 0]);
+                ${{modelNameSingularLowerCase}} = ${{modelNameSingularLowerCase}}->delete();
+                $response = [ 
+                    'status'  => 'OK',
+                    'code'    => 200,
+                    'message' => __('{{tableName}} Deleted Successfully'),
+                    'data'    => ${{modelNameSingularLowerCase}},
+                ];
+                return response()->json($response, 200);
+            }
+            else {
+                $response = [
+                    'status'  => 'OK',
+                    'code'    => 404,
+                    'message' => __('{{tableName}} not Found'),
+                ];
+                return response()->json($response, 200);
+            }
+            
+        } catch (\Exception $ex) {
+            Log::error($ex);
+            $response = [
+                'status'  => 'FAILED',
+                'code'    => 500,
+                'message' => __('An error has occurred') . '.',
+            ];
+            return response()->json($response, 500);
+        }
+    }
+
+    public function change_status(Request $request, $id) {
+        
+        ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->find($id);
+        if (isset(${{modelNameSingularLowerCase}}->active)) {
+            if(${{modelNameSingularLowerCase}}->active == 0){
+                $data = ['active' => 1];
+            }else{
+                $data = ['active' => 0];
+            }
+            ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->update(${{modelNameSingularLowerCase}}, $data);
+            $response = [
+                'status'  => 'OK',
+                'code'    => 200,
+                'message' => __('Status {{tableName}} updated'),
+                'data'    => ${{modelNameSingularLowerCase}},
+            ];
+            return response()->json($response, 200);
+        }
+        $response = [
+            'status'  => 'FAILED',
+            'code'    => 500,
+            'message' => __('{{tableName}} does not exist') . '.',
+        ];
+        return response()->json($response, 500);
+    }
+    public function custom_message() {
+        
+        return [
+            'name.required'=> __('The name is required'),
+        ];
+    }
+}

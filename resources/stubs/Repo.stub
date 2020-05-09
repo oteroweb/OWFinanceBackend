@@ -1,0 +1,35 @@
+<?php
+    
+    namespace App\Http\Models\Repositories;
+    
+    use Mockery\Matcher\Type;
+    use Illuminate\Support\Facades\Log;
+    use App\Http\Models\Entities\{{modelName}};
+    
+    class {{modelName}}Repo {
+        public function all() {
+            ${{modelNameSingularLowerCase}} = {{modelName}}::whereIn('active', [1,0])->with([])
+            ->get();            
+            return ${{modelNameSingularLowerCase}};
+        }
+        public function find($id) {
+            ${{modelNameSingularLowerCase}} = {{modelName}}::with([])->find($id);
+            return ${{modelNameSingularLowerCase}};
+        }        
+        public function store($data) {            
+            ${{modelNameSingularLowerCase}} = new {{modelName}}();
+            ${{modelNameSingularLowerCase}}->fill($data);
+            ${{modelNameSingularLowerCase}}->save();
+            return ${{modelNameSingularLowerCase}};
+        }        
+        public function update(${{modelNameSingularLowerCase}}, $data) {
+            ${{modelNameSingularLowerCase}}->fill($data);
+            ${{modelNameSingularLowerCase}}->save();
+            return ${{modelNameSingularLowerCase}};
+        }
+        public function delete(${{modelNameSingularLowerCase}}, $data) {
+            ${{modelNameSingularLowerCase}}->fill($data);
+            ${{modelNameSingularLowerCase}}->save();
+            return ${{modelNameSingularLowerCase}};
+        }
+    }
