@@ -18,7 +18,9 @@ class CreateCategoryItemsTable extends Migration
             $table->unsignedBigInteger('parent')->nullable();
             $table->foreign('parent')->references('id')->on('category_items');
             $table->integer('depth');
+            $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

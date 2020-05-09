@@ -17,7 +17,9 @@ class CreateCategoryTransactionsTable extends Migration
             $table->id();
             $table->string("name",60);
             // $table->double("interest",8,2);
+            $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

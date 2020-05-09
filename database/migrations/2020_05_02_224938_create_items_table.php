@@ -26,8 +26,8 @@ class CreateItemsTable extends Migration
             $table->foreign('category_item_id')->references('id')->on('category_items')->nullable();
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

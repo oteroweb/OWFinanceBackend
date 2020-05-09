@@ -18,7 +18,9 @@ class CreateInvoicesTable extends Migration
             $table->double('cost_unit',8,2);
             $table->double('total',8,2);
             $table->string('notes' );
+            $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
