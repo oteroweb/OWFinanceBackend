@@ -101,7 +101,6 @@
             }
         }
         public function update(Request $request, $id) {
-            echo "hola"; exit;
                 $currency = $this->CurrencyRepo->find($id);
                 if (isset($currency->id)) {
                     $data= array();
