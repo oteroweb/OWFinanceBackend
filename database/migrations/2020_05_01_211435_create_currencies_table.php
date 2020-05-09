@@ -19,7 +19,9 @@ class CreateCurrenciesTable extends Migration
             $table->double('tax',8,2);
             $table->double('last_tax',8,2);
             $table->string('symbol', 35);
+            $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
