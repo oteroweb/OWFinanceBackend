@@ -23,6 +23,7 @@ class CreateCustomersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('currency_id');
             $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
