@@ -19,6 +19,7 @@ class Invoice extends Model
     ];
     protected $fillable   = [
         'id',
+        'name',
         'cost_unit',
         'total',
         'notes',
