@@ -8,7 +8,7 @@
     use Illuminate\Support\Facades\Validator;
     use Illuminate\Support\Facades\Log;
     
-    class AccountController extends BaseController {
+    class AccountController extends Controller {
         private $AccountRepo;
         public function __construct(AccountRepo $AccountRepo) {
             $this->AccountRepo = $AccountRepo;
@@ -96,11 +96,21 @@
                 return response()->json($response, 200);
             } catch (\Exception $ex) {
                 Log::error($ex);
-                $response = [
-                    'status'  => 'FAILED',
-                    'code'    => 500,
-                    'message' => __('An error has occurred') . '.',
-                ];
+                if (strpos($ex->getMessage(), 'SQLSTATE[23000]') !== false) {
+                    $errorForeing = $this->get_string_between($ex->errorInfo[2],'CONSTRAINT', 'FOREIGN');
+                    $response = [
+                        'status'  => 'FAILED',
+                        'code'    => 500,
+                        'message' => __($errorForeing.'error') . '.',
+                    ];
+                }
+                else{
+                    $response = [
+                        'status'  => 'FAILED',
+                        'code'    => 500,
+                        'message' => __('An error has occurred') . '.',
+                    ];
+                }
                 return response()->json($response, 500);
             }
         }
