@@ -15,6 +15,7 @@ class CreateCategoryItemsTable extends Migration
     {
         Schema::create('category_items', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 35);
             $table->unsignedBigInteger('parent')->nullable();
             $table->foreign('parent')->references('id')->on('category_items');
             $table->integer('depth');
