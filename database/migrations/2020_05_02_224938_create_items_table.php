@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->double('total',8,2);
             $table->string('notes' );
             $table->integer('order');
-            $table->boolean('active');
+            $table->boolean('active')->default(1);
             $table->integer('quantity');
             $table->unsignedBigInteger('category_item_id');
             $table->foreign('category_item_id')->references('id')->on('category_items')->nullable();
