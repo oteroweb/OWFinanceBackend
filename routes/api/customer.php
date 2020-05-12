@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/customer',
+    'prefix'     => 'api/1.0/customers',
 ], function () {
   //Customer ROUTES 
     Route::get('/all', ['uses'=> 'CustomerController@all']);

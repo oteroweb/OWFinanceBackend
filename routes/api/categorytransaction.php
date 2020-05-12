@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/category_transaction',
+    'prefix'     => 'api/1.0/category_transactions',
 ], function () {
   //CategoryTransaction ROUTES 
     Route::get('/all', ['uses'=> 'CategoryTransactionController@all']);

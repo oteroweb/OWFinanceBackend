@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/invoice',
+    'prefix'     => 'api/1.0/invoices',
 ], function () {
   //Invoice ROUTES 
     Route::get('/all', ['uses'=> 'InvoiceController@all']);

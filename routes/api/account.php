@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/account',
+    'prefix'     => 'api/1.0/accounts',
 ], function () {
   //Account ROUTES 
     Route::get('/all', ['uses'=> 'AccountController@all']);

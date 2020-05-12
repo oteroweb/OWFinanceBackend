@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/currency',
+    'prefix'     => 'api/1.0/currencies',
 ], function () {
   //Currency ROUTES 
     Route::get('/all', ['uses'=> 'CurrencyController@all']);
