@@ -132,13 +132,13 @@ class ServiceGenerator extends Command
             file_put_contents(base_path("/routes/api/".strtolower($name).".php"), $routeTemplate);
         }
 
-        protected function getTableHumanName($name) { return trim(ucwords(preg_replace('/(?<!\ )[A-Z]/', ' $0', $name))); }
-        protected function getNameSingularLowerCase($name) { return strtolower($name); }
-        protected function getNameRouteName($name) { return Str::of($name)->snake()->plural(); }
-        protected function getTableName($name) { return Str::snake(Str::plural($name)); }
-        protected function getFieldList($name) { return $fields = "'" . implode ( "', '", $this->getArray($this->getTableName($name)) ) . "'"; }
-        protected function getArray($name) { return DB::getSchemaBuilder()->getColumnListing($this->getTableName($name)); }
-        protected function getValidatorList($name){  
+    protected function getTableHumanName($name) { return trim(ucwords(preg_replace('/(?<!\ )[A-Z]/', ' $0', $name))); }
+    protected function getNameSingularLowerCase($name) { return strtolower($name); }
+    protected function getNameRouteName($name) { return Str::of($name)->snake()->plural(); }
+    protected function getTableName($name) { return Str::snake(Str::plural($name)); }
+    protected function getFieldList($name) { return $fields = "'" . implode ( "', '", $this->getArray($this->getTableName($name)) ) . "'"; }
+    protected function getArray($name) { return DB::getSchemaBuilder()->getColumnListing($this->getTableName($name)); }
+    protected function getValidatorList($name){  
             $validatorList = null;
             $table = DB::select(DB::raw('SHOW COLUMNS FROM '.$this->getTableName($name)));
             foreach ($table as $key => $value) {
@@ -152,31 +152,30 @@ class ServiceGenerator extends Command
             }
             return $validatorList;
         }
-        protected function getDataList($name) {
-            $fields =DB::getSchemaBuilder()->getColumnListing($this->getTableName($name)); 
-            $dataList = null;
-            foreach ($fields as $key => $value) {
-                if( $value === "id" || $value === "created_at" || $value === "updated_at" || $value === "deleted_at"|| $value === "active" ) { continue; } 
-    
+    protected function getDataList($name) {
+        $fields =DB::getSchemaBuilder()->getColumnListing($this->getTableName($name)); 
+        $dataList = null;
+        foreach ($fields as $key => $value) {
+            if( $value === "id" || $value === "created_at" || $value === "updated_at" || $value === "deleted_at"|| $value === "active" ) { continue; } 
                 $dataList .= '"'.$value.'"=> $request->input("'.$value.'"),';
-            }
-            return $dataList;
-        } 
-        protected function getDataRequest($name) {
-            $fields =DB::getSchemaBuilder()->getColumnListing('transactions'); 
-            $dataRequest = null;
-            foreach ($fields as $value) {
-                if( $value === "id" || $value === "created_at" || $value === "updated_at" || $value === "deleted_at"|| $value === "active" ) { continue; } 
-                $dataRequest .= 'if (($request->input("'.$value.'"))) { $data += ["'.$value.'" => $request->input("'.$value.'")]; };';
-            }
-            return $dataRequest;
         }
-        protected function get_string_between($string, $start, $end){
-            $string = ' ' . $string;
-            $ini = strpos($string, $start);
-            if ($ini == 0) return '';
-            $ini += strlen($start);
-            $len = strpos($string, $end, $ini) - $ini;
-            return substr($string, $ini, $len);
+        return $dataList;
+    } 
+    protected function getDataRequest($name) {
+        $fields =DB::getSchemaBuilder()->getColumnListing('transactions'); 
+        $dataRequest = null;
+        foreach ($fields as $value) {
+        if( $value === "id" || $value === "created_at" || $value === "updated_at" || $value === "deleted_at"|| $value === "active" ) { continue; } 
+        $dataRequest .= 'if (($request->input("'.$value.'"))) { $data += ["'.$value.'" => $request->input("'.$value.'")]; };';
         }
+        return $dataRequest;
+    }
+    protected function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
 }
