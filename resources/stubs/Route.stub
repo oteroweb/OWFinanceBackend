@@ -7,7 +7,7 @@
     'middleware' => [
         'api',
     ],
-    'prefix'     => 'api/1.0/{{modelNameSingularLowerCase}}',
+    'prefix'     => 'api/1.0/{{modelNameRouteName}}',
 ], function () {
   //{{modelName}} ROUTES 
     Route::get('/all', ['uses'=> '{{modelName}}Controller@all']);

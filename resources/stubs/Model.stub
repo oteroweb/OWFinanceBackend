@@ -17,12 +17,7 @@ class {{modelName}} extends Model
         'updated_at' => 'datetime:Y-m-d',
         'deleted_at' => 'datetime:Y-m-d',
     ];
-    protected $fillable   = [
-        'id',
-        'name',
-        'active',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $fillable   = [ {{fieldList}} ];
+    The current UNIX timestamp is {{ time() }}.
+
 }

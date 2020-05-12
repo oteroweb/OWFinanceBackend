@@ -19,7 +19,7 @@ class {{modelName}}Controller extends Controller
             $response = [
                 'status'  => 'OK',
                 'code'    => 200,
-                'message' => __('{{tableName}} Obtained Correctly'),
+                'message' => __('{{TableHumanName}} Obtained Correctly'),
                 'data'    => ${{modelNameSingularLowerCase}},
             ];
             return response()->json($response, 200);
@@ -41,7 +41,7 @@ class {{modelName}}Controller extends Controller
                 $response = [
                     'status'  => 'OK',
                     'code'    => 200,
-                    'message' => __('{{tableName}} Obtained Correctly'),
+                    'message' => __('{{TableHumanName}} Obtained Correctly'),
                     'data'    => ${{modelNameSingularLowerCase}},
                 ];
                 return response()->json($response, 200);
@@ -49,7 +49,7 @@ class {{modelName}}Controller extends Controller
             $response = [
                 'status'  => 'FAILED',
                 'code'    => 404,
-                'message' => __('Not Data with this {{tableName}}') . '.',
+                'message' => __('Not Data with this {{TableHumanName}}') . '.',
             ];
             return response()->json($response, 200);
         } catch (\Exception $ex) {
@@ -64,7 +64,7 @@ class {{modelName}}Controller extends Controller
     
     public function save(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name'=> 'required',
+            {{validatorList}}
         ], $this->custom_message());
         if ($validator->fails()) {
             $response = [
@@ -77,13 +77,13 @@ class {{modelName}}Controller extends Controller
         }
         try {
             $data = [ 
-            'name'=> $request->input('name'),
+            {{dataList}}
             ];
             ${{modelNameSingularLowerCase}}= $this->{{modelName}}Repo->store($data);
             $response = [
                 'status'  => 'OK',
                 'code'    => 200,
-                'message' => __('{{tableName}} saved correctly'),
+                'message' => __('{{TableHumanName}} saved correctly'),
                 'data'    => ${{modelNameSingularLowerCase}},
             ];
             return response()->json($response, 200);
@@ -102,12 +102,14 @@ class {{modelName}}Controller extends Controller
         ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->find($id);
         if (isset(${{modelNameSingularLowerCase}}->id)) {
             $data= array();
-            if (($request->input('name'))) { $data += ['name' => $request->input('name')]; }
+            if (($request->input('name'))) { 
+                {{dataRequest}}
+            }
             ${{modelNameSingularLowerCase}} = $this->{{modelName}}Repo->update(${{modelNameSingularLowerCase}}, $data);
             $response = [
                 'status'  => 'OK',
                 'code'    => 200,
-                'message' => __('{{tableName}} updated'),
+                'message' => __('{{TableHumanName}} updated'),
                 'data'    => ${{modelNameSingularLowerCase}},
             ];
             return response()->json($response, 200);
@@ -115,7 +117,7 @@ class {{modelName}}Controller extends Controller
         $response = [
             'status'  => 'FAILED',
             'code'    => 500,
-            'message' => __('{{tableName}} dont exists') . '.',
+            'message' => __('{{TableHumanName}} dont exists') . '.',
         ];
         return response()->json($response, 500);
     }
@@ -129,7 +131,7 @@ class {{modelName}}Controller extends Controller
                 $response = [ 
                     'status'  => 'OK',
                     'code'    => 200,
-                    'message' => __('{{tableName}} Deleted Successfully'),
+                    'message' => __('{{TableHumanName}} Deleted Successfully'),
                     'data'    => ${{modelNameSingularLowerCase}},
                 ];
                 return response()->json($response, 200);
@@ -138,7 +140,7 @@ class {{modelName}}Controller extends Controller
                 $response = [
                     'status'  => 'OK',
                     'code'    => 404,
-                    'message' => __('{{tableName}} not Found'),
+                    'message' => __('{{TableHumanName}} not Found'),
                 ];
                 return response()->json($response, 200);
             }
@@ -167,7 +169,7 @@ class {{modelName}}Controller extends Controller
             $response = [
                 'status'  => 'OK',
                 'code'    => 200,
-                'message' => __('Status {{tableName}} updated'),
+                'message' => __('Status {{TableHumanName}} updated'),
                 'data'    => ${{modelNameSingularLowerCase}},
             ];
             return response()->json($response, 200);
@@ -175,7 +177,7 @@ class {{modelName}}Controller extends Controller
         $response = [
             'status'  => 'FAILED',
             'code'    => 500,
-            'message' => __('{{tableName}} does not exist') . '.',
+            'message' => __('{{TableHumanName}} does not exist') . '.',
         ];
         return response()->json($response, 500);
     }
