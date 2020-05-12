@@ -66,6 +66,7 @@ class InvoiceController extends Controller
         $validator = Validator::make($request->all(), [
             'cost_unit'=> 'required',
             'total'=> 'required',
+            'name'=> 'required',
             'notes'=> 'required',
         ], $this->custom_message());
         if ($validator->fails()) {
@@ -79,6 +80,7 @@ class InvoiceController extends Controller
         }
         try {
             $data = [ 
+            'name'=> $request->input('name'),
             'cost_unit'=> $request->input('cost_unit'),
             'total'=> $request->input('total'),
             'notes'=> $request->input('notes'),
@@ -106,6 +108,7 @@ class InvoiceController extends Controller
         $invoice = $this->InvoiceRepo->find($id);
         if (isset($invoice->id)) {
             $data= array();
+            if (($request->input('name'))) { $data += ['name' => $request->input('name')]; }
             if (($request->input('cost_unit'))) { $data += ['cost_unit' => $request->input('cost_unit')]; }
             if (($request->input('total'))) { $data += ['total' => $request->input('total')]; }
             if (($request->input('notes'))) { $data += ['notes' => $request->input('notes')]; }
