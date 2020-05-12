@@ -16,14 +16,7 @@ class CategoryItemController extends Controller
         $this->CategoryItemRepo = $CategoryItemRepo;
     }
     public function all() {
-        $fields =DB::getSchemaBuilder()->getColumnListing('transactions'); 
-        $dataRequest = null;
-        foreach ($fields as $value) {
-            if( $value === "id" || $value === "created_at" || $value === "updated_at" || $value === "deleted_at"|| $value === "active" ) { continue; } 
-            $dataRequest .= 'if (($request->input('.$value.'))) { $data += ['.$value.' => $request->input('.$value.')]; };';
-        }
-        var_dump($dataRequest);
-        exit;
+
         try { $categoryitem = $this->CategoryItemRepo->all();
             $response = [
                 'status'  => 'OK',
