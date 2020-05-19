@@ -17,15 +17,6 @@ class Currency extends Model
         'updated_at' => 'datetime:Y-m-d',
         'deleted_at' => 'datetime:Y-m-d',
     ];
-    protected $fillable   = [
-        'id',
-        'name',
-        'tax',
-        'last_tax',
-        'symbol',
-        'active',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $fillable   = [ 'id', 'name', 'tax', 'last_tax', 'symbol', 'symbol_native', 'decimal_digits', 'rounding', 'name_plural', 'code', 'active', 'created_at', 'updated_at', 'deleted_at' ];
+
 }
