@@ -63,7 +63,7 @@
             $validator = Validator::make($request->all(), [
                 'name'=> 'required',
                 'initial'=> 'required',
-                'current'=> 'required',                      
+                'current'=> '',                      
                 'rate'=> 'required',                      
                 'customer_id'=> 'required',                      
                 'currency_id'=> 'required',                      

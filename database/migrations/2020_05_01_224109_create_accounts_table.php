@@ -16,9 +16,9 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 35);
-            $table->double('initial',8,2);
-            $table->double('current',8,2);
-            $table->double('rate',8,2);
+            $table->double('initial',8,2)->nullable();
+            $table->double('current',8,2)->nullable();
+            $table->double('rate',8,2)->default(1);
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->unsignedBigInteger('currency_id');
