@@ -11,6 +11,7 @@
 ], function () {
   //Currency ROUTES 
     Route::get('/all', ['uses'=> 'CurrencyController@all']);
+    Route::get('/all_active', ['uses'=> 'CurrencyController@allActive']);
     Route::get('/{id}', 'CurrencyController@find');
     Route::post('/save', 'CurrencyController@save');
     Route::put('/update/{id}', 'CurrencyController@update');

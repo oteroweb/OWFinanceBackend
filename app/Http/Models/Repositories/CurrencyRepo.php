@@ -12,6 +12,11 @@
             ->get();            
             return $currency;
         }
+        public function allActive() {
+            $currency = Currency::whereIn('active', [1])->with([])
+            ->get();            
+            return $currency;
+        }
         public function find($id) {
             $currency = Currency::with([])->find($id);
             return $currency;
