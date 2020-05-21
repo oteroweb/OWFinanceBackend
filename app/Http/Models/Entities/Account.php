@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'accounts';
     protected $primaryKey = 'id';
@@ -30,4 +30,17 @@ class Account extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Customer');
+    }
+    public function account()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Account');
+    }
+    public function transaction()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Transaction');
+    }
 }

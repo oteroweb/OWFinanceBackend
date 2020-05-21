@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Currency extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'currencies';
     protected $primaryKey = 'id';
@@ -19,4 +19,12 @@ class Currency extends Model
     ];
     protected $fillable   = [ 'id', 'name', 'tax', 'last_tax', 'symbol', 'symbol_native', 'decimal_digits', 'rounding', 'name_plural', 'code', 'active', 'created_at', 'updated_at', 'deleted_at' ];
 
+    public function customer()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Customer');
+    }
+    public function account()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Account');
+    }
 }

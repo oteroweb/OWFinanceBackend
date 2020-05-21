@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryTransaction extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'category_transactions';
     protected $primaryKey = 'id';
@@ -25,4 +25,8 @@ class CategoryTransaction extends Model
         'updated_at',
         'deleted_at',
     ];
+    public function transaction()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Transaction');
+    }
 }
