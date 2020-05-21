@@ -125,7 +125,7 @@ class CurrencySeeder extends Seeder
             ["symbol"=> "USh", "name" => "Ugandan Shilling", "symbol_native" => "USh", "decimal_digits" => 0, "rounding" => 0, "code" => "UGX", "name_plural" => "Ugandan shillings", 'active' => 0],
             ["symbol"=> "\$U", "name" => "Uruguayan Peso", "symbol_native" => "$", "decimal_digits" => 2, "rounding" => 0, "code" => "UYU", "name_plural" => "Uruguayan pesos", 'active' => 0],
             ["symbol"=> "UZS", "name" => "Uzbekistan Som", "symbol_native" => "UZS", "decimal_digits" => 0, "rounding" => 0, "code" => "UZS", "name_plural" => "Uzbekistan som", 'active' => 0],
-            ["symbol"=> "Bs.", "name" => "Venezuelan Bolívar", "symbol_native" => "Bs.F.", "decimal_digits" => 2, "rounding" => 0, "code" => "VES", "name_plural" => "Venezuelan bolivars", 'active' => 1],
+            ["symbol"=> "Bs.", "name" => "Venezuelan Bolivar", "symbol_native" => "Bs.F.", "decimal_digits" => 2, "rounding" => 0, "code" => "VES", "name_plural" => "Venezuelan bolivars", 'active' => 1],
             ["symbol"=> "₫", "name" => "Vietnamese Dong", "symbol_native" => "₫", "decimal_digits" => 0, "rounding" => 0, "code" => "VND", "name_plural" => "Vietnamese dong", 'active' => 0],
             ["symbol"=> "FCFA", "name" => "CFA Franc BEAC", "symbol_native" => "FCFA", "decimal_digits" => 0, "rounding" => 0, "code" => "XAF", "name_plural" => "CFA francs BEAC", 'active' => 0],
             ["symbol"=> "CFA", "name" => "CFA Franc BCEAO", "symbol_native" => "CFA", "decimal_digits" => 0, "rounding" => 0, "code" => "XOF", "name_plural" => "CFA francs BCEAO", 'active' => 0],
