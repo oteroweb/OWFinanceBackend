@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryItem extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'category_items';
     protected $primaryKey = 'id';
@@ -27,4 +27,8 @@ class CategoryItem extends Model
         'updated_at',
         'deleted_at',
     ];
+    public function item()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Item');
+    }
 }

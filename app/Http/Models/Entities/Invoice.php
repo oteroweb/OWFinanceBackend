@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'invoices';
     protected $primaryKey = 'id';
@@ -28,4 +28,12 @@ class Invoice extends Model
         'updated_at',
         'deleted_at',
     ];
+    public function transaction()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Transaction');
+    }
+    public function item()
+    {
+        return $this->hasOne('App\Http\Models\Entities\Item');
+    }
 }

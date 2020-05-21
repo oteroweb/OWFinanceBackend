@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
-    use SoftDeletes; 
+    use SoftDeletes;
     use Notifiable;
     protected $table      = 'transactions';
     protected $primaryKey = 'id';
@@ -19,4 +19,16 @@ class Transaction extends Model
     ];
     protected $fillable   = [ 'id', 'name', 'account_id', 'category_transaction_id', 'invoice_id', 'amount', 'comission', 'dolar_tax', 'dolar_tax_acquired', 'dolar_amount', 'active', 'created_at', 'updated_at', 'deleted_at' ];
 
+    public function account()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Account');
+    }
+    public function categoryTransaction()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Customer');
+    }
+    public function invoice()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Invoice');
+    }
 }
