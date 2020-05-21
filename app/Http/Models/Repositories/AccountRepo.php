@@ -8,12 +8,12 @@
     
     class AccountRepo {
         public function all() {
-            $account = Account::whereIn('active', [1,0])->with([])
+            $account = Account::whereIn('active', [1,0])->with(['transaction','currency','customer'])
             ->get();            
             return $account;
         }
         public function find($id) {
-            $account = Account::with([])->find($id);
+            $account = Account::with(['transaction','currency','customer'])->find($id);
             return $account;
         }        
         public function store($data) {            

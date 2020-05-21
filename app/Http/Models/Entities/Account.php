@@ -35,9 +35,9 @@ class Account extends Model
     {
         return $this->belongsTo('App\Http\Models\Entities\Customer');
     }
-    public function account()
+    public function currency()
     {
-        return $this->belongsTo('App\Http\Models\Entities\Account');
+        return $this->belongsTo('App\Http\Models\Entities\Currency');
     }
     public function transaction()
     {

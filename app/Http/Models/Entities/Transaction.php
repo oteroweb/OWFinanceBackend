@@ -23,9 +23,9 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Http\Models\Entities\Account');
     }
-    public function categoryTransaction()
+    public function category()
     {
-        return $this->belongsTo('App\Http\Models\Entities\Customer');
+        return $this->belongsTo('App\Http\Models\Entities\CategoryTransaction');
     }
     public function invoice()
     {

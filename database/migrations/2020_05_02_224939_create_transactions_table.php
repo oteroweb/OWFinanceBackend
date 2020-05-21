@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('category_transaction_id');
             $table->foreign('category_transaction_id')->references('id')->on('category_transactions')->nullable();
             $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('invoice_id')->references('id')->on('invoices')->nullable();
             $table->double('amount',8,2);
             $table->double('comission',8,2);
             $table->double('dolar_tax',8,2);

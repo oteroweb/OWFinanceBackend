@@ -8,12 +8,12 @@
     
     class CategoryTransactionRepo {
         public function all() {
-            $categorytransaction = CategoryTransaction::whereIn('active', [1,0])->with([])
+            $categorytransaction = CategoryTransaction::whereIn('active', [1,0])->with(['transaction'])
             ->get();            
             return $categorytransaction;
         }
         public function find($id) {
-            $categorytransaction = CategoryTransaction::with([])->find($id);
+            $categorytransaction = CategoryTransaction::with(['transaction'])->find($id);
             return $categorytransaction;
         }        
         public function store($data) {            

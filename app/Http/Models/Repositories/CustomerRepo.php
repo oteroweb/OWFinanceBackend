@@ -8,12 +8,12 @@
     
     class CustomerRepo {
         public function all() {
-            $currency = Customer::whereIn('active', [1,0])->with([])
+            $currency = Customer::whereIn('active', [1,0])->with(['user','currency'])
             ->get();            
             return $currency;
         }
         public function find($id) {
-            $currency = Customer::with([])->find($id);
+            $currency = Customer::with(['user','currency'])->find($id);
             return $currency;
         }        
         public function store($data) {            

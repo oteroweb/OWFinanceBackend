@@ -8,7 +8,7 @@
     
     class TransactionRepo {
         public function all() {
-            $transaction = Transaction::whereIn('active', [1,0])->with([])
+            $transaction = Transaction::whereIn('active', [1,0])->with(['account','invoice','category'])
             ->get();            
             return $transaction;
         }
