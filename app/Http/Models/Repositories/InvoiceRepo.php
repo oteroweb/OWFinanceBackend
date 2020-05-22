@@ -8,7 +8,7 @@
     
     class InvoiceRepo {
         public function all() {
-            $invoice = Invoice::whereIn('active', [1,0])->with([])
+            $invoice = Invoice::whereIn('active', [1,0])->with(['transaction','item'])
             ->get();            
             return $invoice;
         }

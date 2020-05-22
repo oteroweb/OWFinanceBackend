@@ -34,6 +34,6 @@ class Invoice extends Model
     }
     public function item()
     {
-        return $this->hasOne('App\Http\Models\Entities\Item');
+        return $this->hasMany('App\Http\Models\Entities\Item');
     }
 }

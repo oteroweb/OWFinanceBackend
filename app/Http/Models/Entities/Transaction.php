@@ -23,12 +23,12 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Http\Models\Entities\Account');
     }
-    public function category()
+    public function categoryTransaction()
     {
         return $this->belongsTo('App\Http\Models\Entities\CategoryTransaction');
     }
     public function invoice()
-    {
+    {   
         return $this->belongsTo('App\Http\Models\Entities\Invoice');
     }
 }

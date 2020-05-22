@@ -8,7 +8,7 @@
     
     class CategoryItemRepo {
         public function all() {
-            $categoryitem = CategoryItem::whereIn('active', [1,0])->with([])
+            $categoryitem = CategoryItem::whereIn('active', [1,0])->with(['item'])
             ->get();            
             return $categoryitem;
         }

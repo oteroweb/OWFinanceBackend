@@ -8,7 +8,7 @@
     
     class ItemRepo {
         public function all() {
-            $item = Item::whereIn('active', [1,0])->with([])
+            $item = Item::whereIn('active', [1,0])->with(['invoice','categoryItem'])
             ->get();            
             return $item;
         }

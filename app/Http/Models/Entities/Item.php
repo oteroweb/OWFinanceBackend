@@ -18,4 +18,13 @@ class Item extends Model
         'deleted_at' => 'datetime:Y-m-d',
     ];
     protected $fillable   = [ 'id', 'name', 'cost_unit', 'total', 'notes', 'order', 'active', 'quantity', 'category_item_id', 'invoice_id', 'created_at', 'updated_at', 'deleted_at' ];
+    
+    public function invoice()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\Invoice');
+    }
+    public function categoryItem()
+    {
+        return $this->belongsTo('App\Http\Models\Entities\CategoryItem');
+    }
 }
