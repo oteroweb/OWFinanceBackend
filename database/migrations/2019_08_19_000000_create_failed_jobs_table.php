@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFailedJobsTable extends Migration
 {
+    public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }
     /**
      * Run the migrations.
      *
