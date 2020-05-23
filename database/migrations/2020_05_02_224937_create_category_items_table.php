@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCategoryItemsTable extends Migration
 {
-    public function boot()
-    {
-        Schema::defaultStringLength(191);
-    }
     /**
      * Run the migrations.
      *
