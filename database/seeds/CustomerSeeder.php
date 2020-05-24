@@ -16,6 +16,7 @@ class CustomerSeeder extends Seeder
         $customers = [ 
             ["name"=> "Jose Luis", "lastname" => "Otero Lopez", "subdomain" => "oteroweb", "currency_id" => 1, "active" => 1, 'user_id' => 1],
             ["name"=> "Aura Rosa", "lastname" => "Griman Garcia", "subdomain" => "argriman", "currency_id" => 112, "active" => 1, 'user_id' => 2],
+            ["name"=> "Jose Rafael", "lastname" => "Otero Lopez", "subdomain" => "josmanmx", "currency_id" => 1, "active" => 1, 'user_id' => 3],
             ];
         foreach($customers as $customer){
             Customer::create($customer);
