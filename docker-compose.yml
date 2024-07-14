@@ -15,7 +15,6 @@ services:
       - ./:/var/www
     networks:
       - owfinance
-
   db:
     image: mysql:5.7
     container_name: ow-finance-db
